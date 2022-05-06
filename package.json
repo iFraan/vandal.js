@@ -1,0 +1,29 @@
+{
+  "name": "vandal.js",
+  "version": "1.0.0",
+  "description": "Wrapper for Valorant stats.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iFraan/vandal.js.git"
+  },
+  "keywords": [
+    "valorant-api",
+    "valorant",
+    "val",
+    "stats",
+    "valorant.js",
+    "api",
+    "riot",
+    "riot games"
+  ],
+  "author": "ifraan_",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/iFraan/vandal.js/issues"
+  },
+  "homepage": "https://github.com/iFraan/vandal.js#readme"
+}
