@@ -1,6 +1,6 @@
 {
   "name": "vandal.js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Wrapper for Valorant stats.",
   "main": "index.js",
   "scripts": {
@@ -12,6 +12,7 @@
   },
   "keywords": [
     "valorant-api",
+    "valorant api",
     "valorant",
     "val",
     "stats",

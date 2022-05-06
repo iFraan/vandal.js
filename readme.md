@@ -16,7 +16,7 @@ You must call **VAPI.fetchUser** before using any other method.
 | gamemodes | stats for all queues |
 | agents | stats for all played agents |
 
-Example code: _(Feel free to use my steam username for testing)_
+Example code: _(Feel free to use my riot username for testing)_
 ```js
 const { VAPI } = require('vandal.js')
 
