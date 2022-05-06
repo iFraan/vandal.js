@@ -228,8 +228,8 @@ try {
 			matchesPlayed: 80,
 			matchesWon: 32,
 			...	
-    	},
-    	deathmatch: {
+		},
+		deathmatch: {
 			timePlayed: 13160672,
 			matchesPlayed: 30,
 			matchesWon: 4,
