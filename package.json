@@ -1,7 +1,7 @@
 {
   "name": "vandal.js",
-  "version": "1.0.1",
-  "description": "Wrapper for Valorant stats.",
+  "version": "1.0.2",
+  "description": "Wrapper/Scrapper for Valorant stats.",
   "main": "index.js",
   "scripts": {
     "test": "test.js"
@@ -19,7 +19,8 @@
     "valorant.js",
     "api",
     "riot",
-    "riot games"
+    "riot games",
+    "vandal"
   ],
   "author": "ifraan_",
   "license": "GPL-3.0",

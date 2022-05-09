@@ -1,6 +1,12 @@
 # Vandal.js
-## This a wrapper/scrapper of the TRNetwork site with **Valorant** stats.
+<div align="center">
+   <a href="https://www.npmjs.com/package/vandal.js"><img src="https://badgen.net/npm/v/vandal.js?color=red" alt="NPM-Version"/></a>
+   <a href="https://www.npmjs.com/package/vandal.js"><img src="https://badgen.net/npm/dt/vandal.js?color=red" alt="NPM-Downloads"/></a>
+   <a href="https://github.com/iFraan/vandal.js"><img src="https://badgen.net/github/stars/iFraan/vandal.js?color=green" alt="Github Stars"/></a>
+   <a href="https://github.com/iFraan/vandal.js/issues"><img src="https://badgen.net/github/issues/iFraan/vandal.js?color=green" alt="Issues"/></a>
+</div>
 
+## This a wrapper/scrapper of the TRNetwork site with **Valorant** stats.
 There are no dependencies nor API key required.
 
 To install use:
