@@ -3,7 +3,7 @@ const { exec } = require('child_process');
 const baseUrl = `https://api.tracker.gg/api/v2/valorant/standard/profile/riot/{USERNAME}%23{TAG}`
 
 const fetch = (url) => new Promise((resolve, reject) => {
-    exec(`curl --max-time 5 --user-agent 'Chrome/79' --url ${url}`, (err, result, stderr) => {
+    exec(`curl --max-time 5 --user-agent 'Chrome/99' --url ${url}`, (err, result, stderr) => {
         if (!result) {
             reject(err)
         }

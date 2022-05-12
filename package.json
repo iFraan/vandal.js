@@ -1,6 +1,6 @@
 {
   "name": "vandal.js",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Wrapper/Scrapper for Valorant stats.",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,6 @@
   },
   "keywords": [
     "valorant-api",
-    "valorant api",
     "valorant",
     "val",
     "stats",
