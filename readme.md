@@ -1,11 +1,12 @@
 <div align="center">
 	<h1>Vandal.js</h1>
-   <a href="https://www.npmjs.com/package/vandal.js"><img src="https://badgen.net/npm/v/vandal.js?color=red" alt="NPM-Version"/></a>
-   <a href="https://www.npmjs.com/package/vandal.js"><img src="https://badgen.net/npm/dt/vandal.js?color=red" alt="NPM-Downloads"/></a>
-   <a href="https://github.com/iFraan/vandal.js"><img src="https://badgen.net/github/stars/iFraan/vandal.js?color=green" alt="Github Stars"/></a>
-   <a href="https://github.com/iFraan/vandal.js/issues"><img src="https://badgen.net/github/issues/iFraan/vandal.js?color=green" alt="Issues"/></a>
-   <h2>This a wrapper/scrapper of the TRNetwork site with <b>Valorant</b> stats.</h2>
-   <h3>There are no dependencies nor API key required.</h3>
+	<a href="https://www.codefactor.io/repository/github/ifraan/vandal.js"><img src="https://www.codefactor.io/repository/github/ifraan/vandal.js/badge" alt="CodeFactor" /></a>
+	<a href="https://www.npmjs.com/package/vandal.js"><img src="https://badgen.net/npm/v/vandal.js?color=blue" alt="NPM-Version"/></a>
+	<a href="https://www.npmjs.com/package/vandal.js"><img src="https://badgen.net/npm/dt/vandal.js?color=blue" alt="NPM-Downloads"/></a>
+	<a href="https://github.com/iFraan/vandal.js"><img src="https://badgen.net/github/stars/iFraan/vandal.js?color=yellow" alt="Github Stars"/></a>
+	<a href="https://github.com/iFraan/vandal.js/issues"><img src="https://badgen.net/github/open-issues/iFraan/vandal.js?color=green" alt="Issues"/></a>
+	<h2>This a wrapper/scrapper of the TRNetwork site with <b>Valorant</b> stats.</h2>
+	<h3>There are no dependencies nor API key required.</h3>
 </div>
 
 To install use:
