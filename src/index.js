@@ -3,12 +3,12 @@ const { exec } = require('child_process');
 const baseUrl = `https://api.tracker.gg/api/v2/valorant/standard/profile/riot/{USERNAME}%23{TAG}`
 
 const fetch = (url) => new Promise((resolve, reject) => {
-    exec(`curl --max-time 5 --user-agent 'Chrome/105' --url ${url}`, (err, result, stderr) => {
+    exec(`curl --max-time 5 --user-agent 'Chrome/121' --url ${url}`, (err, result, stderr) => {
         if (!result) {
-            reject(err)
+            reject(err);
         }
-        resolve(JSON.parse(result))
-    })
+        resolve(JSON.parse(result));
+    });
 
 })
 
@@ -146,7 +146,6 @@ class API {
         return this._raw;
     }
 
-    get raw() { return this._raw; }
 }
 
 module.exports = {

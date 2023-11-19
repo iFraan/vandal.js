@@ -9,6 +9,7 @@ m = async () => {
         console.log('Unrated: ', user.unrated())
         console.log('Agents: ', user.agents())
         console.log('ALL GAMEMODES (including deathmatch, spike-rush, etc) ', user.gamemodes())
+        console.log('Raw: ', user.raw());
     } catch (e) {
         console.log(e)
     }
