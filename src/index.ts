@@ -16,6 +16,7 @@ const fetchData = (url) =>
 class API {
     username: string;
     tag: string;
+    _raw: any;
 
     constructor(username: string, tag: string) {
         this.username = username;
