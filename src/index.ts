@@ -1,8 +1,8 @@
-const { exec } = require('child_process');
+import { exec } from 'child_process';
 
-const baseUrl = `https://api.tracker.gg/api/v2/valorant/standard/profile/riot/{USERNAME}%23{TAG}`;
+const BASE_URL = `https://api.tracker.gg/api/v2/valorant/standard/profile/riot/{USERNAME}%23{TAG}`;
 
-const fetch = (url) =>
+const fetchData = (url) =>
     new Promise((resolve, reject) => {
         exec(`curl --max-time 5 --user-agent 'Chrome/121' --url ${url}`, (err, result, stderr) => {
             if (!result) {
@@ -32,7 +32,7 @@ class API {
      */
     static async fetchUser(username, tag) {
         const api = new API(username, tag);
-        api._raw = await fetch(baseUrl.replace('{TAG}', tag).replace('{USERNAME}', username));
+        api._raw = await fetchData(BASE_URL.replace('{TAG}', tag).replace('{USERNAME}', username));
         if (api._raw.errors) throw new Error(api._raw.errors[0].message);
         return api;
     }
