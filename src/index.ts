@@ -114,7 +114,7 @@ class API {
     }
 }
 
-module.exports = {
-    VAPI: API, // compability
+export {
+    API as VAPI, // compability
     API,
 };

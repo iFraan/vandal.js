@@ -41,6 +41,19 @@ type TrackerMetadata = {
     accountLevel: number;
 };
 
+type SegmentStat = {
+    rank: unknown | null;
+    percentile: unknown | null;
+    displayName: string;
+    displayCategory: string;
+    category: string;
+    description: unknown | null;
+    metadata: {};
+    value: number | string;
+    displayValue: string;
+    displayType: string;
+};
+
 type Segments = {
     type: 'season' | 'agent' | 'agent-role';
     attributes: {
@@ -56,7 +69,7 @@ type Segments = {
         endTime: string;
         schemav2: string;
     };
-    stats: any[];
+    stats: {};
     expiryDate: string;
 };
 
