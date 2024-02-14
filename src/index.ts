@@ -1,22 +1,22 @@
 const { exec } = require('child_process');
 
-const baseUrl = `https://api.tracker.gg/api/v2/valorant/standard/profile/riot/{USERNAME}%23{TAG}`
+const baseUrl = `https://api.tracker.gg/api/v2/valorant/standard/profile/riot/{USERNAME}%23{TAG}`;
 
-const fetch = (url) => new Promise((resolve, reject) => {
-    exec(`curl --max-time 5 --user-agent 'Chrome/121' --url ${url}`, (err, result, stderr) => {
-        if (!result) {
-            reject(err);
-        }
-        resolve(JSON.parse(result));
+const fetch = (url) =>
+    new Promise((resolve, reject) => {
+        exec(`curl --max-time 5 --user-agent 'Chrome/121' --url ${url}`, (err, result, stderr) => {
+            if (!result) {
+                reject(err);
+            }
+            resolve(JSON.parse(result));
+        });
     });
-
-})
 
 class API {
     /**
      * Use VAP.fetchUser instead.
-     * @param {string} username 
-     * @param {string} tag 
+     * @param {string} username
+     * @param {string} tag
      * @private // idk if it does something outside of typescript, but there it is
      */
     constructor(username, tag) {
@@ -24,20 +24,18 @@ class API {
         this.tag = tag;
     }
 
-
     /**
      * Initialize the wrapper
-     * @param {string} username 
-     * @param {string} tag 
+     * @param {string} username
+     * @param {string} tag
      * @returns API instance
      */
     static async fetchUser(username, tag) {
-        const api = new API(username, tag)
-        api._raw = await fetch(baseUrl.replace('{TAG}', tag).replace('{USERNAME}', username))
-        if (api._raw.errors) throw new Error(api._raw.errors[0].message)
+        const api = new API(username, tag);
+        api._raw = await fetch(baseUrl.replace('{TAG}', tag).replace('{USERNAME}', username));
+        if (api._raw.errors) throw new Error(api._raw.errors[0].message);
         return api;
     }
-
 
     /**
      * Ranked
@@ -45,9 +43,9 @@ class API {
      * @returns Ranked stats of the player
      */
     ranked(options = {}) {
-        const result = {}
+        const result = {};
         const raw = options.raw || false;
-        const data = this._raw.data.segments.find(x => x.attributes?.playlist == 'competitive');
+        const data = this._raw.data.segments.find((x) => x.attributes?.playlist == 'competitive');
         if (raw) {
             result._raw = data;
         }
@@ -64,9 +62,9 @@ class API {
      * @returns Un-rated stats of the player
      */
     unrated(options = {}) {
-        const result = {}
+        const result = {};
         const raw = options.raw || false;
-        const data = this._raw.data.segments.find(x => x.attributes?.playlist == 'unrated');
+        const data = this._raw.data.segments.find((x) => x.attributes?.playlist == 'unrated');
         if (raw) {
             result._raw = data;
         }
@@ -78,14 +76,13 @@ class API {
         return result;
     }
 
-
     /**
      * Get stats for all gamemodes
      * @returns Formated json of all available playlists stats
      */
     gamemodes() {
         const result = {};
-        const playlists = this._raw.data.segments.filter(x => x.type === 'season');
+        const playlists = this._raw.data.segments.filter((x) => x.type === 'season');
 
         for (const playlist of playlists) {
             result[playlist.metadata.playlistName] = {};
@@ -105,7 +102,7 @@ class API {
      */
     agents() {
         const result = {};
-        const agents = this._raw.data.segments.filter(x => x.type === 'agent');
+        const agents = this._raw.data.segments.filter((x) => x.type === 'agent');
 
         for (const playlist of agents) {
             result[playlist.metadata.name] = {};
@@ -119,7 +116,6 @@ class API {
         return result;
     }
 
-
     /**
      * Get userinfo from the platform
      * @returns userinfo
@@ -128,7 +124,7 @@ class API {
         const result = {};
         const platform = this._raw.data.platformInfo;
         const info = this._raw.data.userInfo;
-        const data = this._raw.data.segments.find(x => x.attributes?.playlist == 'competitive');
+        const data = this._raw.data.segments.find((x) => x.attributes?.playlist == 'competitive');
 
         result['platform'] = platform.platformSlug;
         result['uuid'] = platform.platformUserId;
@@ -145,10 +141,9 @@ class API {
     raw() {
         return this._raw;
     }
-
 }
 
 module.exports = {
     VAPI: API, // compability
     API,
-}
+};
