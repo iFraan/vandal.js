@@ -13,35 +13,21 @@ const fetchData = (url) =>
     });
 
 class API {
-    /**
-     * Use VAP.fetchUser instead.
-     * @param {string} username
-     * @param {string} tag
-     * @private // idk if it does something outside of typescript, but there it is
-     */
-    constructor(username, tag) {
+    username: string;
+    tag: string;
+
+    constructor(username: string, tag: string) {
         this.username = username;
         this.tag = tag;
     }
 
-    /**
-     * Initialize the wrapper
-     * @param {string} username
-     * @param {string} tag
-     * @returns API instance
-     */
-    static async fetchUser(username, tag) {
+    static async fetchUser(username: string, tag: string) {
         const api = new API(username, tag);
         api._raw = await fetchData(BASE_URL.replace('{TAG}', tag).replace('{USERNAME}', username));
         if (api._raw.errors) throw new Error(api._raw.errors[0].message);
         return api;
     }
 
-    /**
-     * Ranked
-     * @param {boolean?} options.raw raw data
-     * @returns Ranked stats of the player
-     */
     ranked(options = {}) {
         const result = {};
         const raw = options.raw || false;
@@ -56,11 +42,7 @@ class API {
         }
         return result;
     }
-    /**
-     * Un-rated
-     * @param {boolean?} options.raw raw data
-     * @returns Un-rated stats of the player
-     */
+
     unrated(options = {}) {
         const result = {};
         const raw = options.raw || false;
@@ -76,10 +58,6 @@ class API {
         return result;
     }
 
-    /**
-     * Get stats for all gamemodes
-     * @returns Formated json of all available playlists stats
-     */
     gamemodes() {
         const result = {};
         const playlists = this._raw.data.segments.filter((x) => x.type === 'season');
@@ -96,10 +74,6 @@ class API {
         return result;
     }
 
-    /**
-     * Get stats for played agents
-     * @returns Formated json of all available agents stats
-     */
     agents() {
         const result = {};
         const agents = this._raw.data.segments.filter((x) => x.type === 'agent');
@@ -116,10 +90,6 @@ class API {
         return result;
     }
 
-    /**
-     * Get userinfo from the platform
-     * @returns userinfo
-     */
     info() {
         const result = {};
         const platform = this._raw.data.platformInfo;
