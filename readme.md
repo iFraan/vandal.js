@@ -1,5 +1,5 @@
 <div align="center">
-    <h1>Vandal.js</h1>
+    <h1>vandal.js</h1>
     <a href="https://www.codefactor.io/repository/github/ifraan/vandal.js"><img src="https://www.codefactor.io/repository/github/ifraan/vandal.js/badge"    alt="CodeFactor" /></a>
     <a href="https://www.npmjs.com/package/vandal.js"><img src="https://badgen.net/npm/v/vandal.js?color=blue" alt="NPM-Version"/></a>
     <a href="https://www.npmjs.com/package/vandal.js"><img src="https://badgen.net/npm/dt/vandal.js?color=blue" alt="NPM-Downloads"/></a>
