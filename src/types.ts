@@ -41,12 +41,32 @@ type TrackerMetadata = {
     accountLevel: number;
 };
 
+type Segments = {
+    type: 'season' | 'agent' | 'agent-role';
+    attributes: {
+        playlist: string;
+        seasonId: string;
+        key?: string | null;
+    };
+    metadata: {
+        name: string;
+        shortName: string;
+        playlistName: string;
+        startTime: string;
+        endTime: string;
+        schemav2: string;
+    };
+    stats: any[];
+    expiryDate: string;
+};
+
 export type TrackerResponse = {
     data: {
         platformInfo: TrackerPlatformInfo;
         userInfo: TrackerUserInfo;
         metadata: TrackerMetadata;
-        segments: any[];
+        segments: Segments[];
         availableSegments: any[];
+        expiryDate: string;
     };
 };
