@@ -379,14 +379,18 @@ type SegmentAgentRoleStats = {
     kAST: SegmentStat;
 };
 
+type SegmentPeakRatingStats = {
+    peakRating: SegmentStat;
+};
+
 type Segments = {
-    type: 'season' | 'agent' | 'agent-role';
+    type: 'season' | 'agent' | 'agent-role' | 'peak-rating';
     attributes: {
-        playlist: string;
-        seasonId: string;
+        playlist?: string;
+        seasonId?: string;
         key?: string | null;
     };
-    metadata: {
+    metadata?: {
         name: string;
         shortName: string;
         playlistName: string;
@@ -394,7 +398,7 @@ type Segments = {
         endTime: string;
         schemav2: string;
     };
-    stats: SegmentSeasonStats | SegmentAgentStats | SegmentAgentRoleStats;
+    stats: SegmentSeasonStats | SegmentAgentStats | SegmentAgentRoleStats | SegmentPeakRatingStats;
     expiryDate: string;
 };
 
