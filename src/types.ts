@@ -3,7 +3,7 @@ export type BaseOptions = {
 };
 
 
-type PlatformInfo = {
+type TrackerPlatformInfo = {
     platformSlug: string;
     platformUserId: string;
     platformUserHandle: string;
@@ -12,7 +12,7 @@ type PlatformInfo = {
     additionalParameters: unknown | null;
 };
 
-type UserInfo = {
+type TrackerUserInfo = {
     userId: unknown;
     isPremium: boolean;
     isVerified: boolean;
@@ -30,11 +30,22 @@ type UserInfo = {
     isSuspicious: boolean | null;
 };
 
+type TrackerMetadata = {
+    activeShard: string;
+    schema: string;
+    privacy: string;
+    defaultPlaylist: string;
+    defaultSeason: string;
+    premierRosterId: string | null;
+    premierCrests: unknown | null;
+    accountLevel: number;
+};
+
 export type TrackerResponse = {
     data: {
-        platformInfo: PlatformInfo;
-        userInfo: UserInfo;
-        metadata: any;
+        platformInfo: TrackerPlatformInfo;
+        userInfo: TrackerUserInfo;
+        metadata: TrackerMetadata;
         segments: any[];
         availableSegments: any[];
     };
