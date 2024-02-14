@@ -34,7 +34,8 @@
         "url": "https://github.com/iFraan/vandal.js/issues"
     },
     "homepage": "https://github.com/iFraan/vandal.js#readme",
-    "dependencies": {
+    "devDependencies": {
+        "@types/node": "^20.11.17",
         "ts-node": "^10.9.2",
         "tsup": "^8.0.2",
         "typescript": "^5.3.3"
