@@ -1,4 +1,5 @@
 import { exec } from 'child_process';
+import { BaseOptions } from './types';
 
 const BASE_URL = `https://api.tracker.gg/api/v2/valorant/standard/profile/riot/{USERNAME}%23{TAG}`;
 
@@ -28,7 +29,7 @@ class API {
         return api;
     }
 
-    ranked(options = {}) {
+    ranked(options: BaseOptions = {}) {
         const result = {};
         const raw = options.raw || false;
         const data = this._raw.data.segments.find((x) => x.attributes?.playlist == 'competitive');
@@ -43,7 +44,7 @@ class API {
         return result;
     }
 
-    unrated(options = {}) {
+    unrated(options: BaseOptions = {}) {
         const result = {};
         const raw = options.raw || false;
         const data = this._raw.data.segments.find((x) => x.attributes?.playlist == 'unrated');
