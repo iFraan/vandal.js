@@ -1,5 +1,5 @@
 import { exec } from 'child_process';
-import { BaseOptions } from './types';
+import { BaseOptions, SegmentSeasonStats, TrackerResponse } from './types/tracker';
 
 const BASE_URL = `https://api.tracker.gg/api/v2/valorant/standard/profile/riot/{USERNAME}%23{TAG}`;
 
@@ -16,7 +16,7 @@ const fetchData = (url) =>
 class API {
     username: string;
     tag: string;
-    _raw: any;
+    _raw: TrackerResponse;
 
     constructor(username: string, tag: string) {
         this.username = username;
@@ -25,7 +25,7 @@ class API {
 
     static async fetchUser(username: string, tag: string) {
         const api = new API(username, tag);
-        api._raw = await fetchData(BASE_URL.replace('{TAG}', tag).replace('{USERNAME}', username));
+        api._raw = (await fetchData(BASE_URL.replace('{TAG}', tag).replace('{USERNAME}', username))) as TrackerResponse;
         if (api._raw.errors) throw new Error(api._raw.errors[0].message);
         return api;
     }
@@ -97,6 +97,7 @@ class API {
         const platform = this._raw.data.platformInfo;
         const info = this._raw.data.userInfo;
         const data = this._raw.data.segments.find((x) => x.attributes?.playlist == 'competitive');
+        const stats = data.stats as SegmentSeasonStats;
 
         result['platform'] = platform.platformSlug;
         result['uuid'] = platform.platformUserId;
@@ -104,8 +105,8 @@ class API {
         result['userid'] = platform.platformUserIdentifier;
         result['avatar'] = platform.avatarUrl;
         result['pageViews'] = info.pageviews;
-        result['rank'] = data?.stats?.rank.metadata.tierName;
-        result['peakRank'] = data?.stats?.peakRank.metadata.tierName;
+        result['rank'] = stats?.rank.metadata.tierName;
+        result['peakRank'] = stats?.peakRank.metadata.tierName;
 
         return result;
     }
