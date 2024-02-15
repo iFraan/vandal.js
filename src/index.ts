@@ -1,6 +1,6 @@
 import { exec } from 'child_process';
 import { BaseOptions, SegmentSeasonStats, TrackerResponse } from './types/tracker';
-import { AgentStats, GamemodesStats, SeasonStats } from './types/internal';
+import { AgentStats, GamemodesStats, SeasonStats, UserInfo } from './types/internal';
 
 const BASE_URL = `https://api.tracker.gg/api/v2/valorant/standard/profile/riot/{USERNAME}%23{TAG}`;
 
@@ -95,20 +95,21 @@ class API {
     }
 
     info() {
-        const result = {};
         const platform = this._raw.data.platformInfo;
         const info = this._raw.data.userInfo;
         const data = this._raw.data.segments.find((x) => x.attributes?.playlist == 'competitive');
         const stats = data.stats as SegmentSeasonStats;
 
-        result['platform'] = platform.platformSlug;
-        result['uuid'] = platform.platformUserId;
-        result['name'] = platform.platformUserHandle;
-        result['userid'] = platform.platformUserIdentifier;
-        result['avatar'] = platform.avatarUrl;
-        result['pageViews'] = info.pageviews;
-        result['rank'] = stats?.rank.metadata.tierName;
-        result['peakRank'] = stats?.peakRank.metadata.tierName;
+        const result: UserInfo = {
+            platform: platform.platformSlug,
+            uuid: platform.platformUserId,
+            name: platform.platformUserHandle,
+            userid: platform.platformUserIdentifier,
+            avatar: platform.avatarUrl,
+            pageViews: info.pageviews,
+            rank: stats?.rank.metadata.tierName,
+            peakRank: stats?.peakRank.metadata.tierName,
+        };
 
         return result;
     }

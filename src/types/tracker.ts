@@ -2,7 +2,7 @@ export type BaseOptions = {
     raw?: boolean;
 };
 
-type TrackerPlatformInfo = {
+export type TrackerPlatformInfo = {
     platformSlug: string;
     platformUserId: string;
     platformUserHandle: string;
@@ -11,7 +11,7 @@ type TrackerPlatformInfo = {
     additionalParameters: unknown | null;
 };
 
-type TrackerUserInfo = {
+export type TrackerUserInfo = {
     userId: unknown;
     isPremium: boolean;
     isVerified: boolean;

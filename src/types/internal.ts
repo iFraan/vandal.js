@@ -1,4 +1,4 @@
-import { Segments } from './tracker';
+import { Segments, TrackerPlatformInfo, TrackerUserInfo } from './tracker';
 
 type SegmentValue = number | string | null;
 
@@ -315,4 +315,15 @@ export type AgentStats = {
     primaryKillsPerMatch: SegmentValue;
     ultimateKills: SegmentValue;
     ultimateKillsPerMatch: SegmentValue;
+};
+
+export type UserInfo = {
+    platform: TrackerPlatformInfo['platformSlug'];
+    uuid: TrackerPlatformInfo['platformUserId'];
+    name: TrackerPlatformInfo['platformUserHandle'];
+    userid: TrackerPlatformInfo['platformUserIdentifier'];
+    avatar: TrackerPlatformInfo['avatarUrl'];
+    pageViews: TrackerUserInfo['pageviews'];
+    rank: string;
+    peakRank: string;
 };
