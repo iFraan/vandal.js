@@ -1,6 +1,6 @@
 import { exec } from 'child_process';
 import { BaseOptions, SegmentSeasonStats, TrackerResponse } from './types/tracker';
-import { SeasonStats } from './types/internal';
+import { GamemodesStats, SeasonStats } from './types/internal';
 
 const BASE_URL = `https://api.tracker.gg/api/v2/valorant/standard/profile/riot/{USERNAME}%23{TAG}`;
 
@@ -62,14 +62,15 @@ class API {
     }
 
     gamemodes() {
-        const result = {};
+        const result = {} as GamemodesStats;
         const playlists = this._raw.data.segments.filter((x) => x.type === 'season');
 
         for (const playlist of playlists) {
-            result[playlist.metadata.playlistName] = {};
+            const playlistName = playlist.metadata.playlistName;
+            result[playlistName] = {} as SeasonStats;
             if (playlist) {
-                for (const key of Object.keys(playlist.stats)) {
-                    result[playlist.metadata.playlistName][key] = playlist.stats[key].value;
+                for (const key in playlist.stats) {
+                    result[playlistName][key] = playlist.stats[key].value;
                 }
             }
         }

@@ -153,3 +153,7 @@ export type SeasonStats = {
     trnPerformanceScore: SegmentValue;
     peakRank: SegmentValue;
 };
+
+export type GamemodesStats = {
+    [playlist: string]: SeasonStats;
+};
