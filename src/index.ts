@@ -4,7 +4,7 @@ import { AgentStats, GamemodesStats, SeasonStats, UserInfo } from './types/inter
 
 const BASE_URL = `https://api.tracker.gg/api/v2/valorant/standard/profile/riot/{USERNAME}%23{TAG}`;
 
-const fetchData = (url) =>
+const fetchData = (url: string) =>
     new Promise((resolve, reject) => {
         exec(`curl --max-time 5 --user-agent 'Chrome/121' --url ${url}`, (err, result) => {
             if (!result) {
