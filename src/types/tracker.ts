@@ -2,7 +2,6 @@ export type BaseOptions = {
     raw?: boolean;
 };
 
-
 type TrackerPlatformInfo = {
     platformSlug: string;
     platformUserId: string;
@@ -48,13 +47,13 @@ type SegmentStat = {
     displayCategory: string;
     category: string;
     description: unknown | null;
-    metadata: {};
+    metadata: any;
     value: number | string;
     displayValue: string;
     displayType: string;
 };
 
-type SegmentSeasonStats = {
+export type SegmentSeasonStats = {
     matchesPlayed: SegmentStat;
     matchesWon: SegmentStat;
     matchesLost: SegmentStat;
@@ -200,9 +199,12 @@ type SegmentSeasonStats = {
     defenseFirstDeaths: SegmentStat;
     defenseFirstDeathsPerRound: SegmentStat;
     defenseKAST: SegmentStat;
+    rank: SegmentStat;
+    trnPerformanceScore: SegmentStat;
+    peakRank: SegmentStat;
 };
 
-type SegmentAgentStats = {
+export type SegmentAgentStats = {
     matchesPlayed: SegmentStat;
     matchesWon: SegmentStat;
     matchesLost: SegmentStat;
@@ -360,7 +362,7 @@ type SegmentAgentStats = {
     ultimateKillsPerMatch: SegmentStat;
 };
 
-type SegmentAgentRoleStats = {
+export type SegmentAgentRoleStats = {
     matchesPlayed: SegmentStat;
     matchesWon: SegmentStat;
     matchesLost: SegmentStat;
@@ -379,7 +381,7 @@ type SegmentAgentRoleStats = {
     kAST: SegmentStat;
 };
 
-type SegmentPeakRatingStats = {
+export type SegmentPeakRatingStats = {
     peakRating: SegmentStat;
 };
 
@@ -411,4 +413,5 @@ export type TrackerResponse = {
         availableSegments: any[];
         expiryDate: string;
     };
+    errors?: { message: string }[];
 };
