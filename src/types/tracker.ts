@@ -47,7 +47,9 @@ type SegmentStat = {
     displayCategory: string;
     category: string;
     description: unknown | null;
-    metadata: any;
+    metadata: {
+        tierName?: string;
+    };
     value: number | string;
     displayValue: string;
     displayType: string;
@@ -410,7 +412,7 @@ export type TrackerResponse = {
         userInfo: TrackerUserInfo;
         metadata: TrackerMetadata;
         segments: Segments[];
-        availableSegments: any[];
+        availableSegments: unknown[];
         expiryDate: string;
     };
     errors?: { message: string }[];
