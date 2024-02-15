@@ -6,7 +6,7 @@ const BASE_URL = `https://api.tracker.gg/api/v2/valorant/standard/profile/riot/{
 
 const fetchData = (url) =>
     new Promise((resolve, reject) => {
-        exec(`curl --max-time 5 --user-agent 'Chrome/121' --url ${url}`, (err, result, stderr) => {
+        exec(`curl --max-time 5 --user-agent 'Chrome/121' --url ${url}`, (err, result) => {
             if (!result) {
                 reject(err);
             }
