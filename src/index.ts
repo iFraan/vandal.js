@@ -1,5 +1,6 @@
 import { exec } from 'child_process';
 import { BaseOptions, SegmentSeasonStats, TrackerResponse } from './types/tracker';
+import { SeasonStats } from './types/internal';
 
 const BASE_URL = `https://api.tracker.gg/api/v2/valorant/standard/profile/riot/{USERNAME}%23{TAG}`;
 
@@ -31,14 +32,14 @@ class API {
     }
 
     ranked(options: BaseOptions = {}) {
-        const result = {};
-        const raw = options.raw || false;
+        const result = {} as SeasonStats;
+        const raw = options.raw ?? false;
         const data = this._raw.data.segments.find((x) => x.attributes?.playlist == 'competitive');
         if (raw) {
             result._raw = data;
         }
         if (data?.stats) {
-            for (const key of Object.keys(data.stats)) {
+            for (const key in data.stats) {
                 result[key] = data.stats[key].value;
             }
         }
@@ -46,14 +47,14 @@ class API {
     }
 
     unrated(options: BaseOptions = {}) {
-        const result = {};
-        const raw = options.raw || false;
+        const result = {} as SeasonStats;
+        const raw = options.raw ?? false;
         const data = this._raw.data.segments.find((x) => x.attributes?.playlist == 'unrated');
         if (raw) {
             result._raw = data;
         }
         if (data?.stats) {
-            for (const key of Object.keys(data.stats)) {
+            for (const key in data.stats) {
                 result[key] = data.stats[key].value;
             }
         }
