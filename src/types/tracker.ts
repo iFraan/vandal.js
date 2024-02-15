@@ -385,7 +385,7 @@ export type SegmentPeakRatingStats = {
     peakRating: SegmentStat;
 };
 
-type Segments = {
+export type Segments = {
     type: 'season' | 'agent' | 'agent-role' | 'peak-rating';
     attributes: {
         playlist?: string;
