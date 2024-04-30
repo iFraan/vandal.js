@@ -1,4 +1,3 @@
-import { exec } from 'child_process';
 import { BaseOptions, SegmentSeasonStats, TrackerResponse } from './types/tracker';
 import { AgentStats, GamemodesStats, SeasonStats, UserInfo } from './types/internal';
 
@@ -6,12 +5,7 @@ const BASE_URL = `https://api.tracker.gg/api/v2/valorant/standard/profile/riot/{
 
 const fetchData = (url: string) =>
     new Promise((resolve, reject) => {
-        exec(`curl --max-time 5 --user-agent 'Chrome/121' --url ${url}`, (err, result) => {
-            if (!result) {
-                reject(err);
-            }
-            resolve(JSON.parse(result));
-        });
+        fetch(url).then(res => res.json()).then(resolve).catch(reject);
     });
 
 class API {
