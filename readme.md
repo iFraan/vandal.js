@@ -9,10 +9,11 @@
     <h3>There are no dependencies nor API key required.</h3>
 </div>
 
-## Instalation
+## Requirements
 
-> This module uses `curl` to fetch data
-> I assume every OS should have it but worth mentioning it anyhow...
+* This requires Node v16+ to work.
+
+## Instalation
 
 ### To install use:
 ```shell
