@@ -2,7 +2,7 @@ import { API } from './src/index';
 
 const test = async () => {
     try {
-        const user = await API.fetchUser('iFraan_', 'G4G');
+        const user = await API.fetchUser('iFraan_', 'G4G', { fetchGamemodes: true });
         console.log('User:', user.info());
         console.log('Ranked:', user.ranked());
         console.log('Unrated: ', user.unrated());
