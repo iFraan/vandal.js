@@ -1,13 +1,13 @@
 import { Segments, TrackerPlatformInfo, TrackerUserInfo } from './tracker';
 
-
 export type BaseOptions = {
     raw?: boolean;
 };
 
-
 export type FetchOptions = {
     fetchGamemodes?: boolean;
+    useCurl?: boolean;
+    flaresolverrUrl?: string;
 }
 
 type SegmentValue = number | string | null;

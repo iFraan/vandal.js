@@ -1,19 +1,9 @@
-import { exec } from 'child_process';
 import { Segments, SegmentSeasonStats, TrackerResponse } from './types/tracker';
 import { AgentStats, GamemodesStats, SeasonStats, UserInfo, BaseOptions, FetchOptions } from './types/internal';
+import { getFetcher } from './helpers/fetcher';
 
 const BASE_URL = `https://api.tracker.gg/api/v2/valorant/standard/profile/riot/{USERNAME}%23{TAG}`;
 const SEGMENT_URL = `https://api.tracker.gg/api/v2/valorant/standard/profile/riot/{USERNAME}%23{TAG}/segments/season?playlist={PLAYLIST}&seasonId={SEASON_ID}&source=web`;
-
-const fetchData = (url: string) =>
-    new Promise((resolve, reject) => {
-        exec(`curl --max-time 5 --user-agent 'Chrome/121' --url ${url}`, (err, result) => {
-            if (!result) {
-                reject(err);
-            }
-            resolve(JSON.parse(result));
-        });
-    });
 
 class API {
     username: string;
@@ -27,6 +17,12 @@ class API {
 
     static async fetchUser(username: string, tag: string, options: FetchOptions = {}) {
         const api = new API(username, tag);
+
+        const fetchData = getFetcher({
+            flaresolverrUrl: options.flaresolverrUrl,
+            useCurl: options.useCurl ?? false,
+        });
+
         api._raw = (await fetchData(BASE_URL.replace('{TAG}', tag).replace('{USERNAME}', username))) as TrackerResponse;
 
         if (options.fetchGamemodes) {
