@@ -1,8 +1,9 @@
 import { exec } from 'child_process';
-import { BaseOptions, SegmentSeasonStats, TrackerResponse } from './types/tracker';
-import { AgentStats, GamemodesStats, SeasonStats, UserInfo } from './types/internal';
+import { Segments, SegmentSeasonStats, TrackerResponse } from './types/tracker';
+import { AgentStats, GamemodesStats, SeasonStats, UserInfo, BaseOptions, FetchOptions } from './types/internal';
 
 const BASE_URL = `https://api.tracker.gg/api/v2/valorant/standard/profile/riot/{USERNAME}%23{TAG}`;
+const SEGMENT_URL = `https://api.tracker.gg/api/v2/valorant/standard/profile/riot/{USERNAME}%23{TAG}/segments/season?playlist={PLAYLIST}&seasonId={SEASON_ID}&source=web`;
 
 const fetchData = (url: string) =>
     new Promise((resolve, reject) => {
@@ -24,9 +25,23 @@ class API {
         this.tag = tag;
     }
 
-    static async fetchUser(username: string, tag: string) {
+    static async fetchUser(username: string, tag: string, options: FetchOptions = {}) {
         const api = new API(username, tag);
         api._raw = (await fetchData(BASE_URL.replace('{TAG}', tag).replace('{USERNAME}', username))) as TrackerResponse;
+
+        if (options.fetchGamemodes) {
+            const seasonId = api._raw.data.metadata.seasons[0].id ?? api._raw.data.metadata.defaultSeason;
+            const playlists = api._raw.data.metadata.playlists;
+            for (const playlist of playlists) {
+                const segment = (await fetchData(SEGMENT_URL
+                    .replace('{TAG}', tag).replace('{USERNAME}', username)
+                    .replace('{PLAYLIST}', playlist.id)
+                    .replace('{SEASON_ID}', seasonId)
+                )) as { data?: Segments[], errors: unknown[] };
+                segment.data && api._raw.data.segments.push(...segment.data);
+            }
+        }
+
         if (api._raw.errors) throw new Error(api._raw.errors[0].message);
         return api;
     }

@@ -1,7 +1,3 @@
-export type BaseOptions = {
-    raw?: boolean;
-};
-
 export type TrackerPlatformInfo = {
     platformSlug: string;
     platformUserId: string;
@@ -38,6 +34,19 @@ type TrackerMetadata = {
     premierRosterId: string | null;
     premierCrests: unknown | null;
     accountLevel: number;
+    seasons: {
+        id: string,
+        name: string,
+        shortName: string,
+        episodeName: string,
+        actName: string,
+        playlists: null
+    }[];
+    playlists: {
+        id: string,
+        name: string,
+        platform: 'pc' | 'console',
+    }[];
 };
 
 type SegmentStat = {
