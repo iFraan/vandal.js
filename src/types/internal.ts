@@ -1,5 +1,15 @@
 import { Segments, TrackerPlatformInfo, TrackerUserInfo } from './tracker';
 
+
+export type BaseOptions = {
+    raw?: boolean;
+};
+
+
+export type FetchOptions = {
+    fetchGamemodes?: boolean;
+}
+
 type SegmentValue = number | string | null;
 
 export type SeasonStats = {
