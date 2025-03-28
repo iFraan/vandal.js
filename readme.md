@@ -11,23 +11,42 @@
 
 ## Instalation
 
-> This module uses `curl` to fetch data
-> I assume every OS should have it but worth mentioning it anyhow...
+**Note:** This module can use many strategies to fetch data: `fetch`, `curl` and `flaresolverr`
+
+- For browser envoriments:
+  - Default `fetch` should be ok, can use a `flaresolverr` if available
+- For server enviroments:
+  - You can try your luck with `fetch` _(node v16+)_, switch to `curl` if it fails
+  - `flaresolverr` is recommended _(the default docker image is ok)_
 
 ### To install use:
+
 ```shell
 npm i vandal.js
 ```
 
 ## Usage
 
+> Before you can use the methods you need to fetch the user data first.
+
 There is only one static function that takes the username and the tag, both required.
 
-```js
-/* returns an API class instance with the data already fetched */
-await API.fetchUser(user, tag) // user#tag
-```
+You can pass additional options:
 
+| Option          | Type    | Description                          | Default     |
+| --------------- | ------- | ------------------------------------ | ----------- |
+| fetchGamemodes  | boolean | Whether to fetch gamemodes stats     | false       |
+| useCurl         | boolean | Whether to use curl instead of fetch | false       |
+| flaresolverrUrl | string  | The url of the flaresolverr instance | `undefined` |
+
+```js
+// this returns an API class instance with the data already fetched
+await API.fetchUser(user, tag, {
+  fetchGamemodes: true, // will fetch unrated. swiftplay, etc.
+  flaresolverrUrl: "http://localhost:8191", // will use flaresolverr instance
+  useCurl: true, // will use curl instead of fetch (ommited when flaresolverrUrl is provided)
+});
+```
 > You must call **API.fetchUser** before using any other method.
 
 | Methods   | Description                 |
@@ -39,18 +58,18 @@ await API.fetchUser(user, tag) // user#tag
 | gamemodes | stats for all queues        |
 | raw       | return raw response         |
 
-
 ## Example code
+
 _Feel free to use my riot username for testing_
+
 ```js
-const { API } = require('vandal.js')
+const { API } = require("vandal.js");
 
 try {
+  const user = await API.fetchUser("iFraan_", "G4G");
 
-    const user = await API.fetchUser('iFraan_', 'G4G')
-
-    console.log('User:', user.info())
-    /*
+  console.log("User:", user.info());
+  /*
     User: {
         platform: 'riot',
         uuid: 'bc4b1936-febc-4c4d-96e6-84b4ceae1197',
@@ -63,8 +82,8 @@ try {
     }
     */
 
-    console.log('Ranked:', user.ranked())
-    /*
+  console.log("Ranked:", user.ranked());
+  /*
     Ranked: {
         matchesPlayed: 22,
         matchesWon: 11,
@@ -214,8 +233,8 @@ try {
     }
     */
 
-    console.log('Unrated: ', user.unrated())
-    /*
+  console.log("Unrated: ", user.unrated());
+  /*
     Unrated:  {
         matchesPlayed: 6,
         matchesWon: 3,
@@ -362,9 +381,9 @@ try {
         peakRank: null
     }
     */
-    
-    console.log('ALL GAMEMODES (including deathmatch, spike-rush, etc) ', user.gamemodes())
-    /* 
+
+  console.log("ALL GAMEMODES (including deathmatch, spike-rush, etc) ", user.gamemodes());
+  /* 
     ALL GAMEMODES (including deathmatch, spike-rush, etc)  {
     competitive: {
         timePlayed: 162654267,
@@ -399,8 +418,8 @@ try {
     }
     */
 
-    console.log('Agents: ', user.agents())
-    /*
+  console.log("Agents: ", user.agents());
+  /*
     Agents:  {
         Killjoy: {
             timePlayed: 1904406,
@@ -523,11 +542,11 @@ try {
     }
     */
 } catch (e) {
-    console.log(e)
-    /* Error: We could not find the player [player]. */
+  console.log(e);
+  /* Error: We could not find the player [player]. */
 }
 ```
 
-
 # Disclaimer
+
 This project is fully for educational purposes and if you want to use the valorant api in a production/commertial enviroment you should ask for one at [Riot Developers](https://developer.riotgames.com/) or email the guys at [TRNetwork](https://tracker.gg/).
