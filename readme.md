@@ -1,73 +1,89 @@
 <div align="center">
-    <h1>vandal.js</h1>
-    <a href="https://www.codefactor.io/repository/github/ifraan/vandal.js"><img src="https://www.codefactor.io/repository/github/ifraan/vandal.js/badge"    alt="CodeFactor" /></a>
+    <h1>🎯 vandal.js</h1>
+    <p><em>A powerful Valorant stats wrapper/scraper for the TRNetwork API</em></p>
+    <a href="https://www.codefactor.io/repository/github/ifraan/vandal.js"><img src="https://www.codefactor.io/repository/github/ifraan/vandal.js/badge" alt="CodeFactor" /></a>
     <a href="https://www.npmjs.com/package/vandal.js"><img src="https://badgen.net/npm/v/vandal.js?color=blue" alt="NPM-Version"/></a>
     <a href="https://www.npmjs.com/package/vandal.js"><img src="https://badgen.net/npm/dt/vandal.js?color=blue" alt="NPM-Downloads"/></a>
     <a href="https://github.com/iFraan/vandal.js"><img src="https://badgen.net/github/stars/iFraan/vandal.js?color=yellow" alt="Github Stars"/></a>
     <a href="https://github.com/iFraan/vandal.js/issues"><img src="https://badgen.net/github/open-issues/iFraan/vandal.js?color=green" alt="Issues"/></a>
-    <h2>This a wrapper/scrapper of the TRNetwork site with <b>Valorant</b> stats.</h2>
-    <h3>There are no dependencies nor API key required.</h3>
+    <h3>✨ No dependencies • 🔑 No API key required • 🚀 Multiple fetch strategies</h3>
 </div>
 
-## Instalation
+---
 
-**Note:** This module can use many strategies to fetch data: `fetch`, `curl` and `flaresolverr`
+## 📦 Installation
 
-- For browser envoriments:
-  - Default `fetch` should be ok, can use a `flaresolverr` if available
-- For server enviroments:
-  - You can try your luck with `fetch` _(node v16+)_, switch to `curl` if it fails
-  - `flaresolverr` is recommended _(the default docker image is ok)_
+> **💡 Pro Tip:** This module supports multiple strategies to fetch data: `fetch`, `curl`, and `flaresolverr`
 
-### To install use:
+### 🌐 Environment Compatibility
 
-```shell
-npm i vandal.js
+- **🖥️ Browser environments:**
+  - Default `fetch` should work perfectly
+  - Can use `flaresolverr` if available for enhanced reliability
+
+- **⚡ Server environments:**
+  - Try `fetch` first _(Node.js v16+)_
+  - Switch to `curl` if fetch fails
+  - `flaresolverr` is **recommended** _(default Docker image works great)_
+
+### 🛠️ Install Command
+
+```bash
+npm install vandal.js
 ```
 
-## Usage
+---
 
-> Before you can use the methods you need to fetch the user data first.
+## 🚀 Usage
 
-There is only one static function that takes the username and the tag, both required.
+> ⚠️ **Important:** You must fetch user data first before using any methods!
 
-You can pass additional options:
+### 📋 Configuration Options
 
 | Option          | Type    | Description                          | Default     |
 | --------------- | ------- | ------------------------------------ | ----------- |
-| fetchGamemodes  | boolean | Whether to fetch gamemodes stats     | false       |
-| useCurl         | boolean | Whether to use curl instead of fetch | false       |
-| flaresolverrUrl | string  | The url of the flaresolverr instance | `undefined` |
+| `fetchGamemodes`  | boolean | Whether to fetch gamemodes stats     | `false`       |
+| `useCurl`         | boolean | Whether to use curl instead of fetch | `false`       |
+| `flaresolverrUrl` | string  | The URL of the flaresolverr instance | `undefined` |
 
-```js
-// this returns an API class instance with the data already fetched
+### 🎯 Basic Setup
+
+```javascript
+// Returns an API class instance with data already fetched
 await API.fetchUser(user, tag, {
-  fetchGamemodes: true, // will fetch unrated. swiftplay, etc.
-  flaresolverrUrl: "http://localhost:8191", // will use flaresolverr instance
-  useCurl: true, // will use curl instead of fetch (ommited when flaresolverrUrl is provided)
+  fetchGamemodes: true, // 🎮 Fetch unrated, swiftplay, etc.
+  flaresolverrUrl: "http://localhost:8191", // 🛡️ Use flaresolverr instance
+  useCurl: true, // 🔧 Use curl instead of fetch (omitted when flaresolverrUrl is provided)
 });
 ```
-> You must call **API.fetchUser** before using any other method.
 
-| Methods   | Description                 |
-| --------- | --------------------------- |
-| info      | user and mmr info           |
-| ranked    | ranked stats                |
-| unrated   | unrated stats               |
-| agents    | stats for all played agents |
-| gamemodes | stats for all queues        |
-| raw       | return raw response         |
+> 🔥 **Remember:** Call `API.fetchUser` before using any other method!
 
-## Example code
+### 📊 Available Methods
 
-_Feel free to use my riot username for testing_
+| Method      | Description                 | 📈 Data Returned |
+| ----------- | --------------------------- | ---------------- |
+| `info()`      | User and MMR information    | Basic profile data |
+| `ranked()`    | Ranked statistics           | Competitive stats |
+| `unrated()`   | Unrated statistics          | Casual game stats |
+| `agents()`    | Stats for all played agents | Agent-specific data |
+| `gamemodes()` | Stats for all game queues   | All game modes |
+| `raw()`       | Raw API response            | Unprocessed data |
 
-```js
+---
+
+## 💻 Example Code
+
+_🎮 Feel free to use my Riot username for testing: **iFraan_#G4G**_
+
+```javascript
 const { API } = require("vandal.js");
 
 try {
+  // 🔍 Fetch user data
   const user = await API.fetchUser("iFraan_", "G4G");
 
+  // 👤 Get user info
   console.log("User:", user.info());
   /*
     User: {
@@ -80,8 +96,9 @@ try {
         rank: 'Gold 2',
         peakRank: 'Diamond 1'
     }
-    */
+  */
 
+  // 🏆 Get ranked stats
   console.log("Ranked:", user.ranked());
   /*
     Ranked: {
@@ -231,8 +248,9 @@ try {
         trnPerformanceScore: 631,
         peakRank: null
     }
-    */
+  */
 
+  // 🎯 Get unrated stats
   console.log("Unrated: ", user.unrated());
   /*
     Unrated:  {
@@ -380,47 +398,49 @@ try {
         defenseKAST: 62.86,
         peakRank: null
     }
-    */
+  */
 
-  console.log("ALL GAMEMODES (including deathmatch, spike-rush, etc) ", user.gamemodes());
+  // 🎮 Get all game modes (including deathmatch, spike-rush, etc)
+  console.log("ALL GAMEMODES: ", user.gamemodes());
   /* 
-    ALL GAMEMODES (including deathmatch, spike-rush, etc)  {
-    competitive: {
-        timePlayed: 162654267,
-        matchesPlayed: 80,
-        matchesWon: 32,
-        ...	
-    },
-    deathmatch: {
-        timePlayed: 13160672,
-        matchesPlayed: 30,
-        matchesWon: 4,
-        ...	
-    },
-    escalation: {
-        timePlayed: 943011,
-        matchesPlayed: 2,
-        matchesWon: 0,
-        ...
-    },
-    spikerush: {
-        timePlayed: 3577956,
-        matchesPlayed: 7,
-        matchesWon: 6,
-        ...
-    },
-    unrated: {
-        timePlayed: 110172811,
-        matchesPlayed: 58,
-        matchesWon: 27,
-        ...
+    ALL GAMEMODES: {
+      competitive: {
+          timePlayed: 162654267,
+          matchesPlayed: 80,
+          matchesWon: 32,
+          ...	
+      },
+      deathmatch: {
+          timePlayed: 13160672,
+          matchesPlayed: 30,
+          matchesWon: 4,
+          ...	
+      },
+      escalation: {
+          timePlayed: 943011,
+          matchesPlayed: 2,
+          matchesWon: 0,
+          ...
+      },
+      spikerush: {
+          timePlayed: 3577956,
+          matchesPlayed: 7,
+          matchesWon: 6,
+          ...
+      },
+      unrated: {
+          timePlayed: 110172811,
+          matchesPlayed: 58,
+          matchesWon: 27,
+          ...
+      }
     }
-    }
-    */
+  */
 
+  // 🤖 Get agent statistics
   console.log("Agents: ", user.agents());
   /*
-    Agents:  {
+    Agents: {
         Killjoy: {
             timePlayed: 1904406,
             matchesPlayed: 1,
@@ -525,28 +545,42 @@ try {
             ultimateKillsPerMatch: 1
         },
         Sage: {
-          ...
+          // ... more agent data
         },
         Omen: {
-          ...
+          // ... more agent data
         },
         Jett: {
-          ...
+          // ... more agent data
         },
         Phoenix: {
-          ...
+          // ... more agent data
         },
         Raze: {
-          ...
+          // ... more agent data
         }
     }
-    */
+  */
 } catch (e) {
   console.log(e);
   /* Error: We could not find the player [player]. */
 }
 ```
 
-# Disclaimer
+---
 
-This project is fully for educational purposes and if you want to use the valorant api in a production/commertial enviroment you should ask for one at [Riot Developers](https://developer.riotgames.com/) or email the guys at [TRNetwork](https://tracker.gg/).
+## ⚖️ Disclaimer
+
+> 📚 **Educational Purpose Only**
+> 
+> This project is created purely for educational purposes. If you plan to use Valorant API data in a production or commercial environment, please:
+> 
+> - 🏢 Request official access at [**Riot Developers**](https://developer.riotgames.com/)
+> - 📧 Contact the team at [**TRNetwork**](https://tracker.gg/)
+
+---
+
+<div align="center">
+    <h3>Made with ❤️ by iFraan</h3>
+    <p><strong>Happy Coding! 🔥</strong></p>
+</div>
